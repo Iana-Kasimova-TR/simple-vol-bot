@@ -57,6 +57,7 @@ bot = telebot.TeleBot('5420433351:AAHxEwFYSn-6_Ld1mm_ujEVJbUx62rtpP5s')
 
 @bot.message_handler(commands=['start'])
 def start_command(message):
+   print('I got the message') 
    bot.send_message(
        message.chat.id,
        'Hello!.\n' +
