@@ -1,4 +1,2 @@
 # -*- coding: utf-8 -*-
-TOKEN = '<bot token>’'
-TIMEZONE = 'Europe/Kiev'
-TIMEZONE_COMMON_NAME = 'Kiev'
+TOKEN = '5420433351:AAHxEwFYSn-6_Ld1mm_ujEVJbUx62rtpP5s'
