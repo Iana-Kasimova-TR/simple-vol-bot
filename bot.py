@@ -37,20 +37,9 @@ from flask import Flask
 #    flat = db.Column(db.Integer, nullable=False)
 
 #authorization
-#gc = pygsheets.authorize(service_file='/Users/erikrood/desktop/QS_Model/creds.json')
+gc = pygsheets.authorize(service_file='/Users/Iana_Kasimova/Documents/mentoring/chatbot/food-353617-6839c9bc6774.json')
 
-#open the google spreadsheet (where 'PY to Gsheet Test' is the name of my sheet)
-#sh = gc.open('PY to Gsheet Test')
-
-
-df = pd.DataFrame(columns=['Name', 'Surname', 'Adress'])
-
-#select the first sheet #
-#wks = sh[0]                                                                                                                                                                                                                 
-
-#update the first sheet with df, starting at cell B2. 
-#wks.set_dataframe(df,(1,1))
-
+df = pd.DataFrame(columns=['Name', 'Surname'])
 
 bot = telebot.TeleBot('5420433351:AAHxEwFYSn-6_Ld1mm_ujEVJbUx62rtpP5s')
 
@@ -67,7 +56,17 @@ def start_command(message):
 #if lambda is true we send a message
 @bot.message_handler(func=lambda m: True)
 def echo_all(message):
-	bot.reply_to(message, message.text)
+    #open the google spreadsheet (where 'PY to Gsheet Test' is the name of my sheet)
+    sh = gc.open('PY to Gsheet Test')
+
+    # select the first sheet 
+    wks = sh[0]
+
+    #update the first sheet with df, starting at cell B2. 
+    df.append({'Name':'Iana', 'Surname':'Kasimova'})
+    
+    wks.set_dataframe(df,(1,1))
+    bot.reply_to(message, message.text)
 
 
 #start the bot
