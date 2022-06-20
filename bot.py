@@ -38,6 +38,7 @@ from flask import Flask
 
 #authorization
 gc = pygsheets.authorize(service_file='food-353617-6839c9bc6774.json')
+sh = gc.open('food')
 
 df = pd.DataFrame(columns=['Name', 'Surname'])
 
@@ -57,7 +58,6 @@ def start_command(message):
 @bot.message_handler(func=lambda m: True)
 def echo_all(message):
     #open the google spreadsheet (where 'PY to Gsheet Test' is the name of my sheet)
-    sh = gc.open('food')
 
     # select the first sheet 
     wks = sh[0]
@@ -69,7 +69,7 @@ def echo_all(message):
     if (len(words) != 2):
         bot.reply_to(message, "Please put correct information! Name and Surname")
     else:
-        df.append({'Name':'Iana', 'Surname':'Kasimova'})
+        df.append({'Name':'Iana', 'Surname':'Kasimova'}, ignore_index=True)
         wks.set_dataframe(df,(1,1))
         bot.reply_to(message, "Thank you!")
 
