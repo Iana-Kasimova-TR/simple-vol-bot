@@ -57,16 +57,21 @@ def start_command(message):
 @bot.message_handler(func=lambda m: True)
 def echo_all(message):
     #open the google spreadsheet (where 'PY to Gsheet Test' is the name of my sheet)
-    sh = gc.open('PY to Gsheet Test')
+    sh = gc.open('food')
 
     # select the first sheet 
     wks = sh[0]
 
     #update the first sheet with df, starting at cell B2. 
-    df.append({'Name':'Iana', 'Surname':'Kasimova'})
 
-    wks.set_dataframe(df,(1,1))
-    bot.reply_to(message, message.text)
+    words = message.text.split()
+
+    if (len(words) != 2):
+        bot.reply_to(message, "Please put correct information! Name and Surname")
+    else:
+        df.append({'Name':'Iana', 'Surname':'Kasimova'})
+        wks.set_dataframe(df,(1,1))
+        bot.reply_to(message, "Thank you!")
 
 
 #start the bot
