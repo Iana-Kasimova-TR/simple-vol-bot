@@ -37,7 +37,7 @@ from flask import Flask
 #    flat = db.Column(db.Integer, nullable=False)
 
 #authorization
-gc = pygsheets.authorize(service_file='/Users/Iana_Kasimova/Documents/mentoring/chatbot/food-353617-6839c9bc6774.json')
+gc = pygsheets.authorize(service_file='food-353617-6839c9bc6774.json')
 
 df = pd.DataFrame(columns=['Name', 'Surname'])
 
@@ -64,7 +64,7 @@ def echo_all(message):
 
     #update the first sheet with df, starting at cell B2. 
     df.append({'Name':'Iana', 'Surname':'Kasimova'})
-    
+
     wks.set_dataframe(df,(1,1))
     bot.reply_to(message, message.text)
 
